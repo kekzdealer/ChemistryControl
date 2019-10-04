@@ -1,0 +1,44 @@
+{
+	"fluids": [
+		{
+			"name": "Oxygen",
+			"amount": "1200000"
+		},
+		{
+			"name": "Molten Polyethylene",
+			"amount": "108000"
+		},
+		{
+			"name": "Molten Polytetrafluoroethylene",
+			"amount": "216000"
+		},
+		{
+			"name": "Nitrogen",
+			"amount": "4000000"
+		},
+		{
+			"name": "Chlorine",
+			"amount": "1200000"
+		},
+		{
+			"name": "Fluorine",
+			"amount": "1700000"
+		},
+		{
+			"name": "Water",
+			"amount": "4000000"
+		},
+		{
+			"name": "Methane",
+			"amount": "3000000"
+		},
+		{
+			"name": "Ethylene",
+			"amount": "3100000"
+		},
+		{
+			"name": "Tetrafluoroethylene",
+			"amount": "2450000"
+		}
+	]
+}

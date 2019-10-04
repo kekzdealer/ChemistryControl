@@ -1,0 +1,96 @@
+{
+	"recipes": [
+		{
+			"circuit": "1",
+			"result": "Molten Polyethylene",
+			"input_fluid": [
+				{
+					"name": "Ethylene",
+					"amount": "144"
+				},
+				{
+					"name": "Oxygen",
+					"amount": "1000"
+				}
+			], 
+			"output_fluid": [
+				{
+					"name": "Molten Polyethylene",
+					"amount": "216"
+				}
+			]
+		},
+		{
+			"circuit": "1",
+			"result": "Molten Polytetrafluoroethylene",
+			"input_fluid": [
+				{
+					"name": "Tetrafluoroethylene",
+					"amount": "144"
+				},
+				{
+					"name": "Oxygen",
+					"amount": "1000"
+				}
+			], 
+			"output_fluid": [
+				{
+					"name": "Molten Polytetrafluoroethylene",
+					"amount": "216"
+				}
+			]
+		},
+		{
+			"circuit": "24",
+			"result": "Tetrafluoroethylene",
+			"input_fluid": [
+				{
+					"name": "Oxygen",
+					"amount": "12000"
+				},
+				{
+					"name": "Methane",
+					"amount": "2000"
+				},
+				{
+					"name": "Hydrofluoric Acid",
+					"amount": "4000"
+				}
+			],
+			"output_fluid": [
+				{
+					"name": "Tetrafluoroethylene",
+					"amount": "1000"
+				},
+				{
+					"name": "Hydrochloric Acid",
+					"amount": "6000"
+				},
+				{
+					"name": "Diluted Hydrochloric Acid",
+					"amount": "6000"
+				}
+			]
+		},
+		{
+			"circuit": "1",
+			"result": "Hydrofluoric Acid",
+			"input_fluid": [
+				{
+					"name": "Hydrogen",
+					"amount": "1000"
+				},
+				{
+					"name": "Fluorine",
+					"amount": "1000"
+				}
+			],
+			"output_fluid": [
+				{
+					"name": "Hydrofluoric Acid",
+					"amount": "1000"
+				}
+			]
+		}
+	]
+}
