@@ -14,6 +14,7 @@ import logic.TFFTJSON;
 /**
  * This class represents data from one of the KekzTech T.F.F.T fluid tanks. 
  * Each tank has a maximum capacity and holds 25 different fluids. The capacity for each fluid is one 25th of the maximum capacity.
+ * 
  * @author kekzdealer
  *
  */

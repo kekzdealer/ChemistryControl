@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import com.google.gson.Gson;
 
@@ -47,6 +48,12 @@ public class CraftingRequestPanel extends JPanel {
 		super();
 		
 		super.setLayout(null);
+		super.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createLineBorder(Color.DARK_GRAY, 1, false), 
+				"Crafting Requests", 
+				TitledBorder.RIGHT, 
+				TitledBorder.BELOW_BOTTOM));
+		super.setBackground(Color.GRAY);
 		
 		final GSONLoader gsonLoader = new GSONLoader();
 		final RecipesJSON dataJSON = gsonLoader.parseLocalJSON("chemicals.txt", RecipesJSON.class);
@@ -157,35 +164,23 @@ public class CraftingRequestPanel extends JPanel {
 					// cache batch recipe
 					lastCalculatedBatch.circuit = recipe.circuit;
 					lastCalculatedBatch.result = recipe.result;
-					final Item[] inputFluids = new Item[recipe.getInputFluidsLength()];
-					final Item[] inputItems = new Item[recipe.getInputItemsLength()];
-					final Item[] outputFluids = new Item[recipe.getOutputFluidsLength()];
-					final Item[] outputItems = new Item[recipe.getOutputItemsLength()];
-					for(int i = 0; i < inputFluids.length; i++) {
-						inputFluids[i] = new Item(
-								recipe.input_fluid[i].name,
-								recipe.input_fluid[i].amount * outputMultiplier);
-					}
-					for(int i = 0; i < inputItems.length; i++) {
-						inputItems[i] = new Item(
-								recipe.input_item[i].name,
-								recipe.input_item[i].amount * outputMultiplier);
-					}
-					for(int i = 0; i < outputFluids.length; i++) {
-						outputFluids[i] = new Item(
-								recipe.output_fluid[i].name,
-								recipe.output_fluid[i].amount * outputMultiplier);
-					}
-					for(int i = 0; i < outputItems.length; i++) {
-						outputItems[i] = new Item(
-								recipe.output_item[i].name,
-								recipe.output_item[i].amount * outputMultiplier);
-					}
-					lastCalculatedBatch.input_fluid = inputFluids;
-					lastCalculatedBatch.input_item = inputItems;
-					lastCalculatedBatch.output_fluid = outputFluids;
-					lastCalculatedBatch.output_item = outputItems;
 					
+					for(Item next : recipe.input_fluid) {
+						next.amount *= outputMultiplier;
+					}
+					for(Item next : recipe.input_item) {
+						next.amount *= outputMultiplier;
+					}
+					for(Item next : recipe.output_fluid) {
+						next.amount *= outputMultiplier;
+					}
+					for(Item next : recipe.output_item) {
+						next.amount *= outputMultiplier;
+					}
+					lastCalculatedBatch.input_fluid = recipe.input_fluid;
+					lastCalculatedBatch.input_item = recipe.input_item;
+					lastCalculatedBatch.output_fluid = recipe.output_fluid;
+					lastCalculatedBatch.output_item = recipe.output_item;
 				} catch (NumberFormatException ex) {
 					//infoPanel.updateError("Requested amount is not a number");
 				}

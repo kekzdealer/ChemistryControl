@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -12,10 +13,10 @@ public class InfoPanel extends JPanel {
 	
 	public InfoPanel(int parentWidth, int parentHeight) {
 		super();
-				
-		super.setLocation(3, parentHeight - 3 - 20 - 30);
-		super.setSize(parentWidth - 12, 20);
+		super.setBackground(Color.LIGHT_GRAY);
 		super.setLayout(null);
+		super.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		super.setVisible(true);
 		
 		contentLabel.setLocation(3, 1);
 		contentLabel.setSize(parentWidth - 14, 18);
