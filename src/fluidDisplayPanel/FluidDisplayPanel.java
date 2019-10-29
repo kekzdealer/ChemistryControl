@@ -1,10 +1,15 @@
 package fluidDisplayPanel;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.TitledBorder;
 
 import data_loader.GSONLoader;
 import graphics.Window;
@@ -19,25 +24,33 @@ import logic.TFFTJSON;
  *
  */
 @SuppressWarnings("serial")
-public class FluidDisplayPanel extends JPanel implements Runnable {
+public class FluidDisplayPanel extends JScrollPane implements Runnable {
 	
 	private final ArrayList<FluidLevelBar> bars = new ArrayList<>();
+	private final JPanel contentPanel = new JPanel();
 	
-	public FluidDisplayPanel(int x, int y, int w, int h) {
+	public FluidDisplayPanel(int maxFluidTypes) {
 		super();
 		
-		super.setLocation(x, y);
-		super.setSize(w, h);
 		super.setBackground(Color.GRAY);
-		super.setLayout(null);
+		super.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createLineBorder(Color.DARK_GRAY, 1, false), 
+				"T.F.F.T Data Feed", 
+				TitledBorder.LEFT, 
+				TitledBorder.TOP));
+		super.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		super.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		final int barHeight = (h - 28) / 25;
-		for(int i = 0; i < 25; i ++) {
-			final FluidLevelBar bar = new FluidLevelBar(w - 10, barHeight);
-			bar.setLocation(3, 1 + (barHeight + 2) * i);
-			super.add(bar);
+		contentPanel.setLayout(new GridLayout(maxFluidTypes, 1));
+		
+		for(int i = 0; i < maxFluidTypes; i ++) {
+			final FluidLevelBar bar = new FluidLevelBar();
+			//bar.setSize(250, 30);
+			contentPanel.add(bar);
 			bars.add(bar);
 		}
+		
+		super.setViewportView(contentPanel);
 	}
 	
 	public void run() {
@@ -50,7 +63,7 @@ public class FluidDisplayPanel extends JPanel implements Runnable {
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException ex) {
-					
+					// ?
 				}
 				continue;
 			}

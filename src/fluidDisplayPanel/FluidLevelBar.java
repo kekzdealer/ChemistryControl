@@ -1,10 +1,7 @@
 package fluidDisplayPanel;
 
-import java.awt.Color;
-
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class FluidLevelBar extends JProgressBar {
@@ -13,10 +10,9 @@ public class FluidLevelBar extends JProgressBar {
 	private int maxCapacity = 4000000;
 	private int usedCapacity = 2000000;
 	
-	public FluidLevelBar(int w, int h) {
+	public FluidLevelBar() {
 		super();		
 		
-		super.setSize(w, h);
 		super.setMinimum(0);
 		super.setOrientation(SwingConstants.HORIZONTAL);
 		super.setStringPainted(true);

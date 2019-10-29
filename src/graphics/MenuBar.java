@@ -1,7 +1,11 @@
 package graphics;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -61,5 +65,19 @@ public class MenuBar extends JMenuBar {
 		settingsMenu.add(autoConnect);
 		// Help
 		helpMenu.add(openGithub);
+		
+		openGithub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+				if(desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+					try {
+						desktop.browse(new URL("https://github.com/kekzdealer/ChemistryControl").toURI());
+					} catch (IOException | URISyntaxException ex) {
+						System.err.println("Failed to open Github repo");
+					}
+				}
+			}
+		});
 	}
 }

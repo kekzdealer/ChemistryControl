@@ -2,8 +2,16 @@ package addRecipePanel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -17,6 +25,9 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import com.google.gson.Gson;
+
+import graphics.Window;
 import logic.Item;
 import logic.Recipe;
 
@@ -141,14 +152,50 @@ public class RecipeEditorPanel extends JPanel {
 		commitButton.setText(commitButtonTitle);
 		super.add(commitButton);
 		
+		commitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				commitRecipe();
+			}
+		});
+		
 	}
 	
-	public Recipe generateRecipe() {
+	private Recipe generateRecipe() {
 		final Recipe recipe = new Recipe();
-		
-		
-		
+		recipe.input_fluid = inputFluids.getItems();
+		recipe.input_item = inputItems.getItems();
+		recipe.output_fluid = outputFluids.getItems();
+		recipe.output_fluid = outputFluids.getItems();
 		return recipe;
+	}
+	
+	private void commitRecipe() {
+		HttpURLConnection con = null;
+		try {
+			final URL url = new URL(Window.URL_PREFIX + "/commit_recipe");
+			con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			con.setConnectTimeout(5000);
+			con.setReadTimeout(5000);
+			
+			con.setDoOutput(true);
+			final DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+			
+			final Recipe recipe = generateRecipe();
+			final Gson gson = new Gson();
+			final String jsonString = gson.toJson(recipe, Recipe.class);
+			dos.write(jsonString.getBytes());
+			dos.flush();
+			dos.close();
+			
+		} catch (MalformedURLException ex) {
+			ex.printStackTrace();
+		} catch (ProtocolException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 }

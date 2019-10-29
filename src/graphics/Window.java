@@ -23,7 +23,7 @@ public class Window extends JFrame {
 	public static final int RECIPE_EDITOR_VIEW = 2;
 	public static final HashMap<Integer, JPanel> views = new HashMap<>();
 	
-	public static final String URL_PREFIX = "http://localhost:8000";
+	public static final String URL_PREFIX = "http://localhost:9876";
 	
 	public static void switchView(int viewID) {
 		final JPanel v = views.get(viewID);
@@ -95,7 +95,9 @@ public class Window extends JFrame {
 		
 		// Initialize T.F.F.T Display
 		final FluidDisplayPanel fluidDisplayPanel = 
-				new FluidDisplayPanel(1030, 11, 300, 600);
+				new FluidDisplayPanel(75);
+		fluidDisplayPanel.setLocation(1030, 10);
+		fluidDisplayPanel.setSize(300, 750);
 		fluidDisplayPanel.setVisible(true);
 		gui.add(fluidDisplayPanel);
 		
